@@ -9,9 +9,9 @@ fwrite($handle, $value);
 fwrite($handle, "\r\n");
 }
 fclose($handle);
-$hit1 = fopen("/tmp/TEMPares/hit.txt", "w+")
+$hit1 = fopen("/tmp/TMPares/hit.txt", "w+")
 fclose($hit1);
-$hit2 = fopen("/tmp/TEMPares/hit.txt", "a")
+$hit2 = fopen("/tmp/TMPares/hit.txt", "a")
 fwrite($hit2,"attempts at /root/Twitterusers.txt" 
 fclose($hit2);
 exit;
