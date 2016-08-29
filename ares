@@ -502,7 +502,7 @@ sleep 0.1 && echo -e "			   \/              \/      \/   	"
 	sleep 1
 	echo -e $red"                ARES "$white""$version" (rev. "$green "$revision"$white") "$yellow"by "$white" deltax & princeofguilty"
 	sleep 1
-	echo -e $green "                         Page:"$red" https://github.com/!!!!!!!!!!! "$transparent
+	echo -e $green "                         Page:"$red" https://github.com/deltaxflux/ares "$transparent
 	sleep 1
 	echo -n "                                 Latest rev."
 	tput civis
