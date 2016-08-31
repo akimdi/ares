@@ -12,7 +12,7 @@ fclose($handle);
 $hit1 = fopen("/tmp/TMPares/hit.txt", "w+");
 fclose($hit1);
 $hit2 = fopen("/tmp/TMPares/hit.txt", "a");
-fwrite($hit2,"attempts at /root/Facebookusers.txt");
+fwrite($hit2,"attempts at /root/Twitterusers.txt");
 fclose($hit2);
 exit;
 ?> 
