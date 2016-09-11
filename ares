@@ -2,7 +2,7 @@
 
 ########## DEBUG Mode ##########
 ##			      ##
-ARES_DEBUG=1
+ARES_DEBUG=0
 ##			      ##
 ################################
 
@@ -1013,39 +1013,6 @@ conditional_clear
 		  esac
 	done
 
-
-function Telekom {
-#Telekom 
-Host_SSID="Telekom"
-Host_ENC="OPEN"
-channel="1"
-speed="54"
-Host_MAC"C0:EE:FB:52:8B:45"
-fakeapmode="hostapd";authmode="hostapdAP"
-webinterface
-}
-
-function UHC {
-#UHC
-Host_SSID="UHC1921"
-Host_ENC="OPEN"
-channel="1"
-speed="54"
-Host_MAC"C0:EE:FB:52:8B:45"
-fakeapmode="hostapd";authmode="hostapdAP"
-webinterface
-}
-
-function FREEWIFI {
-#FREEWIFI
-Host_SSID="FREEWIFI"
-Host_ENC="OPEN"
-channel="1"
-speed="54"
-Host_MAC"C0:EE:FB:52:8B:45"
-fakeapmode="hostapd";authmode="hostapdAP"
-webinterface
-}
 }
 function setinterface2 {
 
