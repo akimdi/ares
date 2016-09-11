@@ -2,7 +2,7 @@
 
 ########## DEBUG Mode ##########
 ##			      ##
-ARES_DEBUG=0
+ARES_DEBUG=1
 ##			      ##
 ################################
 
@@ -543,7 +543,6 @@ function infoap {
 	echo -e "               "$blue"Channel"$transparent" = $channel"
 	echo -e "               "$blue"Speed"$transparent" = ${speed:2} Mbps"
 	echo -e "               "$blue"BSSID"$transparent" = $mac (\e[1;33m$Host_MAC_MODEL $transparent)"
-	echo -e "               "$blue"WPS"$transparent" = $wps"$transparent""
 	echo
 }
 
@@ -977,12 +976,76 @@ function hotspotSelection {
 		echo ""
 		case $yn in
 			1 ) setinterface ; break ;;
-			2 ) dumper ; break ;;
+			2 ) setinterfaceweb ; break ;;
 			3 ) manually; break;;
 			4 ) exitmode; break;;
 			* ) echo "Unknown option. Please choose again"; conditional_clear ;;
 		  esac
 	done
+}
+
+function template {
+
+conditional_clear
+
+	while true; do
+		conditional_clear
+		top
+
+		echo "Select a option"
+		echo "                                       "
+		echo -e "      "$blue"1)"$transparent" StarBucks        "
+		echo -e "      "$blue"2)"$transparent" Telekom     "
+		echo -e "      "$blue"3)"$transparent" UHC       "
+		echo -e "      "$blue"4)"$transparent" FREEWIFI       "
+		echo -e "      "$blue"5)"$red" Exit" $transparent
+		echo "                                       "
+		echo -n "      #> "
+		read yn
+		echo ""
+		case $yn in
+			1 ) Host_SSID="StarBucks";Host_ENC="OPEN";Host_CHAN="1";channel="1";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";webinterface; break;;
+			2 ) Host_SSID="Telekom";Host_ENC="OPEN";Host_CHAN="1";channel="1";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";webinterface; break;;
+			3 ) Host_SSID="UHC";Host_ENC="OPEN";Host_CHAN="1";channel="1";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";webinterface; break;;
+			4 ) Host_SSID="FREEWIFI";Host_ENC="OPEN";Host_CHAN="1";channel="1";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";webinterface; break;;
+			5 ) exitmode; break;;
+			* ) echo "Unknown option. Please choose again"; conditional_clear ;;
+		  esac
+	done
+
+
+function Telekom {
+#Telekom 
+Host_SSID="Telekom"
+Host_ENC="OPEN"
+channel="1"
+speed="54"
+Host_MAC"C0:EE:FB:52:8B:45"
+fakeapmode="hostapd";authmode="hostapdAP"
+webinterface
+}
+
+function UHC {
+#UHC
+Host_SSID="UHC1921"
+Host_ENC="OPEN"
+channel="1"
+speed="54"
+Host_MAC"C0:EE:FB:52:8B:45"
+fakeapmode="hostapd";authmode="hostapdAP"
+webinterface
+}
+
+function FREEWIFI {
+#FREEWIFI
+Host_SSID="FREEWIFI"
+Host_ENC="OPEN"
+channel="1"
+speed="54"
+Host_MAC"C0:EE:FB:52:8B:45"
+fakeapmode="hostapd";authmode="hostapdAP"
+webinterface
+}
 }
 function setinterface2 {
 
@@ -1028,6 +1091,79 @@ wait 3
 generalMenu
 
 
+}
+
+# Choose Interface
+function setinterfaceweb {
+	conditional_clear
+	top
+	#unblock interfaces
+	rfkill unblock all
+
+	# Collect all interfaces in montitor mode & stop all
+	KILLMONITOR=`iwconfig 2>&1 | grep Monitor | awk '{print $1}'`
+
+	for monkill in ${KILLMONITOR[@]}; do
+		airmon-ng stop $monkill >$ares_output_device
+		echo -n "$monkill, "
+	done
+
+	# Create a variable with the list of physical network interfaces
+	readarray -t wirelessifaces < <(./airmon |grep "-" | cut -d- -f1)
+	INTERFACESNUMBER=`./airmon| grep -c "-"`
+
+
+	if [ "$INTERFACESNUMBER" -gt "0" ]; then
+
+		echo $header_setinterface
+		echo
+		i=0
+
+		for line in "${wirelessifaces[@]}"; do
+			i=$(($i+1))
+			wirelessifaces[$i]=$line
+			echo -e "$blue ""$i)"$transparent" $line"
+		done
+		echo
+		echo -n "#? "
+		read line
+		PREWIFI=$(echo ${wirelessifaces[$line]} | awk '{print $1}')
+
+		if [ $(echo "$PREWIFI" | wc -m) -le 3 ]; then
+			conditional_clear
+			top
+			setinterface
+		fi
+
+		readarray -t softwaremolesto < <(./airmon check $PREWIFI | tail -n +8 | grep -v "on interface" | awk '{ print $2 }')
+		WIFIDRIVER=$(./airmon | grep "$PREWIFI" | awk '{print($(NF-2))}')
+		rmmod -f "$WIFIDRIVER" &>$ares_output_device 2>&1
+
+		for molesto in "${softwaremolesto[@]}"; do
+			killall "$molesto" &>$ares_output_device
+		done
+		sleep 0.5
+
+		modprobe "$WIFIDRIVER" &>$ares_output_device 2>&1
+		sleep 0.5
+		# Select Wifi Interface
+		select PREWIFI in $INTERFACES; do
+			break;
+		done
+
+		WIFIMONITOR=$(./airmon start $PREWIFI | grep "enabled on" | cut -d " " -f 5 | cut -d ")" -f 1)
+		WIFI_MONITOR=$WIFIMONITOR
+		WIFI=$PREWIFI
+
+		#No wireless cards
+	else
+
+		echo $setinterface_error
+		sleep 5
+		exitmode
+	fi
+
+	template
 }
 # Choose Interface
 function setinterface {
