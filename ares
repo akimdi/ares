@@ -2,7 +2,7 @@
 
 ########## DEBUG Mode ##########
 ##			      ##
-ARES_DEBUG=0
+ARES_DEBUG=0	
 ##			      ##
 ################################
 
@@ -1381,8 +1381,8 @@ function selectiontemplate {
 		read yn
 		echo ""
 		case $yn in
-			1 ) fakeapmode="hostapd";authmode="hostapdAP"; webinterface; break ;;
-			2 ) fakeapmode="airbase-ng";authmode="wpa_supplicant";webinterface; break ;;
+			1 ) fakeapmode="hostapd";authmode="hostapdAP"; certssl; break ;;
+			2 ) fakeapmode="airbase-ng";authmode="wpa_supplicant";certssl; break ;;
 			3 ) selection; break ;;
 			* ) echo "$general_case_error"; conditional_clear ;;
 		esac
@@ -1421,7 +1421,7 @@ function askAP {
 		echo ""
 		case $yn in
 			1 ) fakeapmode="hostapd";authmode="hostapdAP"; webinterface; break ;;
-			2 ) fakeapmode="airbase-ng";authmode="wpa_supplicant";webinterface; break ;;
+			2 ) fakeapmode="airbase-ng";authmode="wpa_supplicant";certssl; break ;;
 			3 ) selection; break ;;
 			* ) echo "$general_case_error"; conditional_clear ;;
 		esac
@@ -1603,7 +1603,66 @@ function webinterface {
 	done
 }
 
-	function ConnectionRESET {
+# function for ssl
+function certssl {
+# Test if the ssl certificate is generated correcly if there is any
+
+		if [ -f $DUMP_PATH/server.pem ]; then
+		if [ -s $DUMP_PATH/server.pem ]; then
+
+		webinterface
+		break
+		else
+		echo "                                       "
+		echo "  Certificate invalid or not present, please choice"
+		echo "                                       "
+		echo -e "      "$green"1)"$transparent" Create  a SSL certificate"
+		echo -e "      "$green"2)"$transparent" Search for SSl certificate" # hop to certssl check again 
+		echo -e "      "$green"3)"$red"Exit" $transparent
+		echo " "
+		echo -n '      #> '
+		read yn
+
+		case $yn in
+			1 ) creassl;;
+			2 ) certssl;break;;
+			3 ) exitmode; break;;
+			* ) echo "$general_case_error"; conditional_clear
+		esac
+		fi
+	else
+		while true; do
+		echo "                                       "
+		echo "   Certificate invalid or not present, please choice"
+		echo "                                       "
+		echo -e "      "$green"1)"$transparent" Create  a SSL certificate"
+		echo -e "      "$green"2)"$transparent" Search for SSl certificate" # hop to certssl check again 
+		echo -e "      "$green"3)"$red"Exit" $transparent
+		echo " "
+		echo -n '      #> '
+		read yn
+		
+		case $yn in
+			1 ) creassl;;
+			2 ) certssl; break;;
+			3 ) exitmode; break;;
+			* ) echo "$general_case_error"; conditional_clear
+		esac
+		
+	done
+		
+	fi
+	
+
+}
+
+# Create Self-Signed SSL Certificate
+function creassl {
+	xterm -title "Create Self-Signed SSL Certificate" -e openssl req -subj '/CN=SEGURO/O=SEGURA/OU=SEGURA/C=US' -new -newkey rsa:2048 -days 365 -nodes -x509 -keyout $DUMP_PATH/server.pem -out $DUMP_PATH/server.pem # more details there https://www.openssl.org/docs/manmaster/apps/openssl.html
+	certssl
+}
+
+function ConnectionRESET {
 
 		while true; do
 			conditional_clear
