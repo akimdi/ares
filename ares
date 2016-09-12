@@ -998,17 +998,21 @@ conditional_clear
 		echo -e "      "$blue"2)"$transparent" Telekom     "
 		echo -e "      "$blue"3)"$transparent" UHC       "
 		echo -e "      "$blue"4)"$transparent" FREEWIFI       "
-		echo -e "      "$blue"5)"$red" Exit" $transparent
+		echo -e "      "$blue"5)"$transparent" Facebook       "
+		echo -e "      "$blue"6)"$transparent" Twitter       "
+		echo -e "      "$blue"7)"$red" Exit" $transparent
 		echo "                                       "
 		echo -n "      #> "
 		read yn
 		echo ""
 		case $yn in
-			1 ) Host_SSID="StarBucks";Host_ENC="OPEN";Host_CHAN="1";channel="1";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";webinterface; break;;
-			2 ) Host_SSID="Telekom";Host_ENC="OPEN";Host_CHAN="1";channel="1";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";webinterface; break;;
-			3 ) Host_SSID="UHC";Host_ENC="OPEN";Host_CHAN="1";channel="1";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";webinterface; break;;
-			4 ) Host_SSID="FREEWIFI";Host_ENC="OPEN";Host_CHAN="1";channel="1";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";webinterface; break;;
-			5 ) exitmode; break;;
+			1 ) Host_SSID="StarBucks";Host_ENC="OPEN";Host_CHAN="1";channel="1";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
+			2 ) Host_SSID="Telekom";Host_ENC="OPEN";Host_CHAN="1";channel="1";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
+			3 ) Host_SSID="UHC";Host_ENC="OPEN";Host_CHAN="1";channel="1";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
+			4 ) Host_SSID="FREEWIFI";Host_ENC="OPEN";Host_CHAN="1";channel="1";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
+			5 ) Host_SSID="Facebook";Host_ENC="OPEN";Host_CHAN="1";channel="1";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
+			6 ) Host_SSID="Twitter";Host_ENC="OPEN";Host_CHAN="1";channel="1";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
+			7 ) exitmode; break;;
 			* ) echo "Unknown option. Please choose again"; conditional_clear ;;
 		  esac
 	done
@@ -1339,6 +1343,50 @@ function selection {
 	conditional_clear
 
 	askAP
+
+
+}
+
+
+# choose a network
+function selectiontemplate {
+
+	conditional_clear
+	top
+
+	echo "                        WIFI LIST "
+	echo ""
+	echo " #      MAC                      CHAN    SECU     PWR    ESSID"
+	echo -e "" $transparent"1)"$red"     $Host_MAC"$blue"          $Host_CHAN"$yellow"     $Host_ENC"$purple"     100"$green"    $Host_SSID"
+	
+
+	echo ""
+	echo "        Select Target              "
+	echo -n "      #> "
+	read coice
+
+
+	
+	while true; do
+
+		infoap
+
+		echo "          #### $header_askAP ####"
+		echo "                                       "
+		echo -e "      "$blue"1)"$transparent" $askAP_option_1"
+		echo -e "      "$blue"2)"$transparent" $askAP_option_2"
+		echo -e "      "$blue"3)"$red" $general_back" $transparent""
+		echo "                                       "
+		echo -n "      #> "
+		read yn
+		echo ""
+		case $yn in
+			1 ) fakeapmode="hostapd";authmode="hostapdAP"; webinterface; break ;;
+			2 ) fakeapmode="airbase-ng";authmode="wpa_supplicant";webinterface; break ;;
+			3 ) selection; break ;;
+			* ) echo "$general_case_error"; conditional_clear ;;
+		esac
+	done
 
 
 }
