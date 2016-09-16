@@ -491,11 +491,16 @@ if [ $ARES_DEBUG != 1 ]; then
 	echo ""
 		   sleep 0.1 && echo -e "$red "                                                                                                                                       
            sleep 0.1 && echo -e ""                                         
-sleep 0.1 && echo -e "			_____   _______   ____    ______	"
-sleep 0.1 && echo -e "			\__  \  \_  __ \_/ __ \  /  ___/	"
-sleep 0.1 && echo -e "			 / __ \_ |  | \/\  ___/  \___ \ 	"
-sleep 0.1 && echo -e "			(_____ / |__|    \____ >/_____ >	"
-sleep 0.1 && echo -e "			   \/              \/      \/   	"
+sleep 0.1 && echo -e "			 ▄▄▄       ██▀███  ▓█████   ██████ ";
+sleep 0.1 && echo -e "			▒████▄    ▓██ ▒ ██▒▓█   ▀ ▒██    ▒ ";
+sleep 0.1 && echo -e "			▒██  ▀█▄  ▓██ ░▄█ ▒▒███   ░ ▓██▄   ";
+sleep 0.1 && echo -e "			░██▄▄▄▄██ ▒██▀▀█▄  ▒▓█  ▄   ▒   ██▒";
+sleep 0.1 && echo -e "			 ▓█   ▓██▒░██▓ ▒██▒░▒████▒▒██████▒▒";
+sleep 0.1 && echo -e "			 ▒▒   ▓▒█░░ ▒▓ ░▒▓░░░ ▒░ ░▒ ▒▓▒ ▒ ░";
+sleep 0.1 && echo -e "			  ▒   ▒▒ ░  ░▒ ░ ▒░ ░ ░  ░░ ░▒  ░ ░";
+sleep 0.1 && echo -e "			  ░   ▒     ░░   ░    ░   ░  ░  ░  ";
+sleep 0.1 && echo -e "			      ░  ░   ░        ░  ░      ░  ";
+sleep 0.1 && echo -e "			                                   ";           
            sleep 0.2 && echo -e 
 	echo""
 	
