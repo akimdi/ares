@@ -491,17 +491,15 @@ if [ $ARES_DEBUG != 1 ]; then
 	echo ""
 		   sleep 0.1 && echo -e "$red "                                                                                                                                       
            sleep 0.1 && echo -e ""                                         
-sleep 0.1 && echo -e "			 ▄▄▄       ██▀███  ▓█████   ██████ ";
-sleep 0.1 && echo -e "			▒████▄    ▓██ ▒ ██▒▓█   ▀ ▒██    ▒ ";
-sleep 0.1 && echo -e "			▒██  ▀█▄  ▓██ ░▄█ ▒▒███   ░ ▓██▄   ";
-sleep 0.1 && echo -e "			░██▄▄▄▄██ ▒██▀▀█▄  ▒▓█  ▄   ▒   ██▒";
-sleep 0.1 && echo -e "			 ▓█   ▓██▒░██▓ ▒██▒░▒████▒▒██████▒▒";
-sleep 0.1 && echo -e "			 ▒▒   ▓▒█░░ ▒▓ ░▒▓░░░ ▒░ ░▒ ▒▓▒ ▒ ░";
-sleep 0.1 && echo -e "			  ▒   ▒▒ ░  ░▒ ░ ▒░ ░ ░  ░░ ░▒  ░ ░";
-sleep 0.1 && echo -e "			  ░   ▒     ░░   ░    ░   ░  ░  ░  ";
-sleep 0.1 && echo -e "			      ░  ░   ░        ░  ░      ░  ";
-sleep 0.1 && echo -e "			                                   ";           
-           sleep 0.2 && echo -e 
+sleep 0.1 && echo -e "                 .o.       ooooooooo.   oooooooooooo  .oooooo..o ";
+sleep 0.1 && echo -e "                .888.      \`888   \`Y88. \`888'     \`8 d8P'    \`Y8 ";
+sleep 0.1 && echo -e "               .8\"888.      888   .d88'  888         Y88bo.      ";
+sleep 0.1 && echo -e "              .8' \`888.     888ooo88P'   888oooo8     \`\"Y8888o.  ";
+sleep 0.1 && echo -e "             .88ooo8888.    888\`88b.     888    \"         \`\"Y88b ";
+sleep 0.1 && echo -e "            .8'     \`888.   888  \`88b.   888       o oo     .d8P ";
+sleep 0.1 && echo -e "           o88o     o8888o o888o  o888o o888ooooood8 8\"\"88888P'  ";
+sleep 0.1 && echo -e "                                                      ";
+sleep 0.2 && echo -e 
 	echo""
 	
 	sleep 1
