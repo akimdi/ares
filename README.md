@@ -28,7 +28,7 @@ All contributions are welcome, from code to documentation, to graphics, to desig
 
 ##  :heavy_exclamation_mark: Requirements
 
-A linux operating system. We recommend Kali Linux 2 or Kali 2016.1 rolling. Kali 2 & 2016 support the latest aircrack-ng versions. A external wifi card is recommended. 
+A linux operating system. We recommend Kali Linux 2 or Kali 2016.1 rolling. Kali 2 & 2016 support the latest aircrack-ng versions. An external wifi card is recommended. 
 
 ## :octocat: Credits
 1. Deltax @FluX and Fluxion main developer and now ares
