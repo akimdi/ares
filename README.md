@@ -1,3 +1,6 @@
+##please dont be asshole and please dont hack other's accounts, protect there privacy. 
+##We are not responsible for any illegal uses.
+
 #Ares is a network toolkit 
 Ares is a social network toolkit. 
 
