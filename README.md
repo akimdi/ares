@@ -4,12 +4,6 @@
 #Ares is a network toolkit 
 Ares is a social network toolkit. 
 
-##Known bugs 
-1. Tcpdump interface isn't setup correctly [*not required]
-2. Templates and manual mode is not working 
-3. Setinterface2 not working [nearly bug 1]
-4. Ares pip at the end isn't setup correctly 
-
 ## :scroll: Changelog
 Ares gets weekly updates with new features, improvements and bugfixes. 
 Be sure to check out the [Changelog] (https://github.com/deltaxflux/ares)
